@@ -6,16 +6,16 @@
 
 ### Модели детекции
 Подготовили код и провели эксперименты по детекции для следующих алгоритмов:
- ⁃ Hotelling's T-squared statistics;
- ⁃ Hotelling's T-squared statistics + Q statistics based on PCA;
- ⁃ Isolation forest;
- ⁃ LSTM-based NN (LSTM);
- ⁃ Feed-Forward Autoencoder;
- ⁃ LSTM Autoencoder (LSTM-AE);
- ⁃ LSTM Variational Autoencoder (LSTM-VAE);
- ⁃ Convolutional Autoencoder (Conv-AE);
- ⁃ Multi-Scale Convolutional Recurrent Encoder-Decoder (MSCRED);
- ⁃ Multivariate State Estimation Technique (MSET).
+- Hotelling's T-squared statistics;
+- Hotelling's T-squared statistics + Q statistics based on PCA;
+- Isolation forest;
+- LSTM-based NN (LSTM);
+- Feed-Forward Autoencoder;
+- LSTM Autoencoder (LSTM-AE);
+- LSTM Variational Autoencoder (LSTM-VAE);
+- Convolutional Autoencoder (Conv-AE);
+- Multi-Scale Convolutional Recurrent Encoder-Decoder (MSCRED);
+- Multivariate State Estimation Technique (MSET).
 
 ### Модели классификации
 Разработаны модели классификации на основе TSFresh, SKLearn и методов классификации на основе градиентного бустинга. Также подготовили код для ансамблирования алгоритмов.
@@ -24,7 +24,7 @@
 Возможно решение задачи создания рекомендаций на основе оптимизации. Подробнее можно ознакомиться в [этом репозитории](https://github.com/waico/evraz-hack).
 
 ### Обучение модели
-В ходе проведение экспериментов и обучения модели необходимо оборачивать код в контекст экспериментов MLFlow с включенным автоматическим логгироваем. Артефакты обучения применяются в микросервисе применения модели [MlfloKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka):
+В ходе проведение экспериментов и обучения модели необходимо оборачивать код в контекст экспериментов MLFlow с включенным автоматическим логгироваем. Артефакты обучения применяются в микросервисе применения модели [MLFlowKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka):
 
 ```python
 import mlflow
@@ -71,4 +71,4 @@ kubectl apply -f debezium.yaml -n kafka
 
 ### Запуск обученной модели машинного обучения
 
-Произведите запуск микросервиса применения модели [MlfloKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka) в соответсвии с интрукцией.
+Произведите запуск микросервиса применения модели [MLFlowKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka) в соответсвии с интрукцией.
