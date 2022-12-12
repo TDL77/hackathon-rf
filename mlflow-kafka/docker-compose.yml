@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  mlflow-kafka:
+    image: mlflow-kafka
+    container_name: mlflow-kafka
+    environment:
+      KAFKA_HOST: "broker:29092"
+      MINUTES_OFFSET: 5
+      S3_MODEL: "runs:/c92f01c6f01f44aabae338b2174e229b/artifacts"
+      TZ: Europe/Moscow
+    restart: always
+    depends_on:
+      broker:
+        condition: service_healthy
