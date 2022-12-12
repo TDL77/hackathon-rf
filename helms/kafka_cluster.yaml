@@ -1,0 +1,76 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: my-cluster
+spec:
+  kafka:
+    replicas: 1
+    logging:
+      type: inline
+      loggers:
+        kafka.root.logger.level: "DEBUG"
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+        authentication:
+          type: scram-sha-512
+      - name: external
+        port: 9094
+        type: ingress
+        tls: true
+        authentication:
+          type: scram-sha-512
+        configuration:
+          class: nginx
+          bootstrap:
+            host: bootstrap.192.168.15.160.nip.io
+          brokers:
+          - broker: 0
+            host: broker-0.192.168.15.160.nip.io
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 500m
+      limits:
+        memory: 2Gi
+        cpu: 1000m
+    jvmOptions:
+      -Xms: 800m
+      -Xmx: 900m
+    authorization:
+      type: simple
+    storage:
+      deleteClaim: true
+      size: 10Gi
+      type: persistent-claim
+    config:
+      offsets.topic.replication.factor: 1
+      transaction.state.log.replication.factor: 1
+      transaction.state.log.min.isr: 1
+      default.replication.factor: 1
+      log.message.format.version: "2.1"
+  zookeeper:
+    replicas: 1
+    jvmOptions:
+      -Xms: 256m
+      -Xmx: 256m
+    storage:
+      type: persistent-claim
+      size: 10Gi
+      deleteClaim: true
+    resources:
+      requests:
+        memory: 384Mi
+        cpu: 200m
+      limits:
+        memory: 384Mi
+        cpu: 1000m
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

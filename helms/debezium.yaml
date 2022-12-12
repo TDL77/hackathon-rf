@@ -1,0 +1,19 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: my-debezium-connector-jhodb
+  labels:
+    strimzi.io/cluster: my-connect
+spec:
+  class: io.debezium.connector.postgresql.PostgresConnector
+  tasksMax: 1
+  config:
+    database.hostname: jhodb-postgres-chart.jhodb
+    database.port: 5432
+    database.user: postgres
+    database.password: super_pwd
+    database.dbname: jhodb
+    database.server.name: jhodb-debezium
+    slot.name: slot_debezium
+    plugin.name: pgoutput
+    decimal.handling.mode: double
