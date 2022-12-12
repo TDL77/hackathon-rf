@@ -23,6 +23,18 @@
 ### Модели оптимизации
 Возможно решение задачи создания рекомендаций на основе оптимизации. Подробнее можно ознакомиться в [этом репозитории](https://github.com/waico/evraz-hack).
 
+### Обучение модели
+В ходе проведение экспериментов и обучения модели необходимо оборачивать код в контекст экспериментов MLFlow с включенным автоматическим логгироваем. Артефакты обучения применяются в микросервисе применения модели [MlfloKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka):
+
+```python
+import mlflow
+
+mlflow.autolog()
+with mlflow.start_run():
+    ...
+
+```
+
 ### Запуск необходимых сервисов в кластере Kubernates
 
 Устанавливаем strimzi операторы kafka:
@@ -56,3 +68,7 @@ kubectl apply -f kafka_connect.yaml -n kafka
 ```
 kubectl apply -f debezium.yaml -n kafka
 ```
+
+### Запуск обученной модели машинного обучения
+
+Произведите запуск микросервиса применения модели [MlfloKafkaPredictor](https://github.com/waico/hackathon-rf/tree/main/mlflow-kafka) в соответсвии с интрукцией.
